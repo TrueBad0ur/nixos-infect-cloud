@@ -1,0 +1,7 @@
+vkcs_provider.tf
+terraform.tfstate
+terraform.tfstate.backup
+.terraform.lock.hcl
+terraform/terraform-yandex-cloud/.terraform/*
+terraform/terraform-vk-cloud/.terraform/*
+mcs1405272978-openrc.sh

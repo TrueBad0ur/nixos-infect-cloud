@@ -1,0 +1,42 @@
+---
+- hosts: hosts
+  become: true
+  #become_user: root
+  #remote_user: debian
+  gather_facts: true
+  tasks:
+    - name: Pause for 30 seconds to wait the machine up
+      ansible.builtin.pause:
+        seconds: 30
+        prompt: "Paused for 30 seconds, waiting for the machine up"
+    - name: Download script
+      ansible.builtin.shell: wget https://raw.githubusercontent.com/elitak/nixos-infect/master/nixos-infect
+      #ignore_errors: yes
+
+    - name: Add execute
+      ansible.builtin.shell: chmod +x nixos-infect
+
+    - name: Install curl
+      ansible.builtin.package:
+        name: curl
+        state: present
+
+    - name: Install nix
+      become: false
+      ansible.builtin.shell: curl -L https://nixos.org/nix/install | sh
+      #ignore_errors: yes
+
+    - name: Add nix's sh to bashrc
+      become: false
+      ansible.builtin.shell: echo "source /home/debian/.nix-profile/etc/profile.d/nix.sh" >> /home/debian/.bashrc
+
+    - name: Run binary
+      ansible.builtin.shell: ./nixos-infect
+      register: hello
+      ignore_errors: yes
+    - debug: msg="{{ hello.stdout }}"
+
+    - name: Pause for 30 seconds to reboot
+      ansible.builtin.pause:
+        seconds: 30
+        prompt: "Paused for 30 seconds to reboot"
