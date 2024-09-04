@@ -1,12 +1,11 @@
-#Manual
+# Manual
 https://github.com/TrueBad0ur/StressTester/blob/main/README.md
 
-#After
-Ansible will fail cause I didn't process machine reboot
+# After
+Everything is done via running `./run.sh --vk`</br>
+If wanna clear - `./run.sh -dv`
 
-After that we can connect via root (also didn't process the right way)
-
-#ToDo
+# ToDo
 
 - [ ] Write for yandex cloud
 - [X] Write processing for right ansible reboot machine exception
