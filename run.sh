@@ -26,7 +26,7 @@ elif [ $1 == "--vk" ] || [ $1 == "-v" ]; then
 
   echo -ne "[hosts]\nhost1 ansible_host=$ip ansible_user=debian\n\n[all:vars]\nansible_ssh_private_key_file=~/.ssh/id_rsa_public" > ansible/hosts
   echo "Little sleep when infra is loading"
-  sleep 10
+  sleep 30
   (cd ansible && ansible-playbook -i hosts install.yml)
 
   echo "Nix installed, starting nixos-infect installation"
